@@ -16,7 +16,7 @@ charset-normalizer==3.3.2
 et-xmlfile==1.1.0
     # via openpyxl
 faiss-cpu==1.8.0.post1
-    # via faq-seach
+    # via faq-search
 filelock==3.15.4
     # via huggingface-hub
     # via torch
@@ -48,13 +48,13 @@ numpy==1.26.4
     # via sentence-transformers
     # via transformers
 openpyxl==3.1.5
-    # via faq-seach
+    # via faq-search
 packaging==24.1
     # via faiss-cpu
     # via huggingface-hub
     # via transformers
 pandas==2.2.2
-    # via faq-seach
+    # via faq-search
 pillow==10.4.0
     # via sentence-transformers
 python-dateutil==2.9.0.post0
@@ -77,7 +77,7 @@ scipy==1.14.0
     # via scikit-learn
     # via sentence-transformers
 sentence-transformers==3.0.1
-    # via faq-seach
+    # via faq-search
 six==1.16.0
     # via python-dateutil
 sympy==1.12.1
@@ -87,7 +87,7 @@ threadpoolctl==3.5.0
 tokenizers==0.19.1
     # via transformers
 torch==2.4.0
-    # via faq-seach
+    # via faq-search
     # via sentence-transformers
 tqdm==4.66.4
     # via huggingface-hub

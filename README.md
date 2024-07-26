@@ -1,8 +1,8 @@
 <div align="center">
 
-# faq-seach
+# faq-search
 
-<img src="https://github.com/moz-sec/faq-search/blob/main/img/faq_seach_top_icon.png" width="200">
+<img src="https://github.com/moz-sec/faq-search/blob/main/img/faq_search_top_icon.png" width="200">
 
 [![Lang](https://img.shields.io/badge/python-3.10.14+-yellow.svg?logo=python)](https://www.python.org/)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
