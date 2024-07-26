@@ -13,4 +13,5 @@ wheels/
 .DS_Store
 
 # data
-data/*
+data/faq.db
+data/*dataset_.xlsx
