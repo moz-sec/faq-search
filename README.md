@@ -8,6 +8,7 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Linting: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![codecov](https://codecov.io/github/moz-sec/faq-search/graph/badge.svg?token=EQ7ZLCE2IH)](https://codecov.io/github/moz-sec/faq-search)
 
 `faq-search` is FAQ search system.
 
