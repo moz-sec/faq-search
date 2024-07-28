@@ -20,8 +20,7 @@
 This repository uses the [FAQ dataset](https://d.line-scdn.net/stf/linecorp/ja/csr/dataset_.zip) provided by LINE Corporation.
 [Faiss (Facebook AI Similarity Search)](https://engineering.fb.com/2017/03/29/data-infrastructure/faiss-a-library-for-efficient-similarity-search/) developed by Facebook, identifies questions that are similar to the query and outputs an Answer.
 
-Click here to read the article on LINE Corporation.
-[https://linecorp.com/ja/csr/newslist/ja/2020/260](https://linecorp.com/ja/csr/newslist/ja/2020/260)
+Article on LINE Corporation: [https://linecorp.com/ja/csr/newslist/ja/2020/260](https://linecorp.com/ja/csr/newslist/ja/2020/260)
 
 ## Usage
 
@@ -45,7 +44,36 @@ options:
 ```bash
 git clone https://github.com/moz-sec/faq-search.git && cd faq-search
 pip install -r requirements.lock
+
 python src/faq-search/main.py -h
+python src/faq-search/main.py インフルエンザ
+```
+
+### Ubuntu
+
+When pip install is performed on ubuntu, I get error: `externally-managed-environment`.
+Therefore, create another Python environment with **venv**, and install libraries and execute programs in that environment.
+
+```bash
+sudo apt install python3-pip python3.12-venv -y
+git clone https://github.com/moz-sec/faq-search.git && cd faq-search
+python -m venv .venv
+source .venv/bin/activate
+
+pip install -r requirements.lock
+python src/faq-search/main.py -h
+
+deactivate
+```
+
+In some environments, `Segmentation fault: 11` may occur.
+It occurs during **SentenceTransformer()** processing, but the cause is unknown.
+If this error occurs, setting the environment variable `OMP_NUM_THREADS=1` will solve the problem.
+
+reference: [https://github.com/UKPLab/sentence-transformers/issues/2332](https://github.com/UKPLab/sentence-transformers/issues/2332)
+
+```bash
+export OMP_NUM_THREADS=1
 python src/faq-search/main.py インフルエンザ
 ```
 
