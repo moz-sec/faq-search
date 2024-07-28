@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+main.py: faq search system
+"""
+
+__author__ = "moz-sec"
+__version__ = "0.1.0"
+__date__ = "2024/07/25 (Created: 2024/07/19)"
+
 import argparse
 import io
 import os
@@ -14,14 +22,6 @@ import faiss
 import numpy as np
 import pandas
 from sentence_transformers import SentenceTransformer
-
-"""
-main.py: faq search system
-"""
-
-__author__ = "moz-sec"
-__version__ = "0.1.0"
-__date__ = "2024/07/25 (Created: 2024/07/19)"
 
 
 def create_faq_database(project_dir: Path) -> str:
@@ -89,7 +89,9 @@ def compute_faq_embeddings(
     return faq_ids, np.array(model.encode(faq_questions))
 
 
-def create_faiss_index(model: SentenceTransformer, embeddings, doc_ids: int) -> int:
+def create_faiss_index(
+    model: SentenceTransformer, embeddings, doc_ids: int
+) -> faiss.IndexFlatL2:
     """
     Create a Faiss index.
     """
@@ -101,7 +103,9 @@ def create_faiss_index(model: SentenceTransformer, embeddings, doc_ids: int) -> 
     return index_flat_l2
 
 
-def search_faq(query: str, model: SentenceTransformer, index: int, k=3):
+def search_faq(
+    query: str, model: SentenceTransformer, index: faiss.IndexFlatL2, k: int
+) -> list:
     """
     Search FAQ.
     """
@@ -133,6 +137,13 @@ def main():
         "query",
         help="search faq",
     )
+    parser.add_argument(
+        "-n",
+        "--num",
+        type=int,
+        default=3,
+        help="number of search results",
+    )
     args = parser.parse_args()
 
     faq_db = create_faq_database(Path.cwd())
@@ -146,7 +157,9 @@ def main():
 
     index_flat_l2 = create_faiss_index(model, faq_embeddings, faq_ids)
 
-    faq_indices = search_faq(query=args.query, model=model, index=index_flat_l2)
+    faq_indices = search_faq(
+        query=args.query, model=model, index=index_flat_l2, k=args.num
+    )
     # print(faq_indices)
 
     results = get_faq_results(

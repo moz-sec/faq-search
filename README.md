@@ -27,16 +27,17 @@ Article on LINE Corporation: [https://linecorp.com/ja/csr/newslist/ja/2020/260](
 The following is the `faq-search` help output.
 
 ```txt
-usage: main.py [-h] [-v] query
+usage: main.py [-h] [-v] [-n NUM] query
 
 faq search system
 
 positional arguments:
-  query          search faq
+  query              search faq
 
 options:
-  -h, --help     show this help message and exit
-  -v, --version  show program's version number and exit
+  -h, --help         show this help message and exit
+  -v, --version      show program's version number and exit
+  -n NUM, --num NUM  number of search results
 ```
 
 ## Quick Start
