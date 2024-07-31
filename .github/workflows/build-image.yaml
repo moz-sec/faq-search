@@ -1,15 +1,8 @@
 name: Build and push Docker image
 on:
   push:
-    paths:
-      - 'pyproject.toml'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'pyproject.toml'
-    types:
-      - closed
+    tags:
+      - '*.*.*'
 
 jobs:
   build-and-push:
@@ -41,8 +34,6 @@ jobs:
           file: docker/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ghcr.io/${{ github.repository }}:latest
-          cache-from:
-              type=registry,ref=ghcr.io/${{ github.repository }}:buildcache
-          cache-to:
-              type=registry,ref=ghcr.io/${{ github.repository }}:buildcache,mode=max
+          tags: ghcr.io/${{ github.repository }}:${{ github.ref }}
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache,mode=max
