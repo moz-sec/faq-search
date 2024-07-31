@@ -1,0 +1,47 @@
+name: Build and push Docker image
+on:
+  push:
+    paths:
+      - 'pyproject.toml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'pyproject.toml'
+    types:
+      - closed
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout the project
+        uses: actions/checkout@v4
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          cache-from:
+              type=registry,ref=ghcr.io/${{ github.repository }}:buildcache
+          cache-to:
+              type=registry,ref=ghcr.io/${{ github.repository }}:buildcache,mode=max
