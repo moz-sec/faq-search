@@ -67,6 +67,21 @@ python src/faq-search/main.py -h
 deactivate
 ```
 
+### Docker
+
+You can also create a container image from the GitHub Container Registry(ghcr.io) and run it.
+It is designed to execute python programs, and only program arguments can be specified.
+By default, `python src/faq-search/main.py -help` is executed.
+The image is created in [docker/Dockerfile](https://github.com/moz-sec/faq-search/blob/main/docker/Dockerfile). See the Dockerfile for details.
+
+```bash
+docker pull ghcr.io/moz-sec/faq-search:latest
+docker run ghcr.io/moz-sec/faq-search:latest
+docker run ghcr.io/moz-sec/faq-search:latest インフルエンザ
+```
+
+### Error handling
+
 In some environments, `Segmentation fault: 11` may occur.
 It occurs during **SentenceTransformer()** processing, but the cause is unknown.
 If this error occurs, setting the environment variable `OMP_NUM_THREADS=1` will solve the problem.
