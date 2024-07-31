@@ -70,9 +70,11 @@ deactivate
 ### Docker
 
 You can also create a container image from the GitHub Container Registry(ghcr.io) and run it.
+It is located in [pkgs/container](https://github.com/moz-sec/faq-search/pkgs/container/faq-search/251107998?tag=latest).
 It is designed to execute python programs, and only program arguments can be specified.
 By default, `python src/faq-search/main.py -help` is executed.
-The image is created in [docker/Dockerfile](https://github.com/moz-sec/faq-search/blob/main/docker/Dockerfile). See the Dockerfile for details.
+The image is created in [docker/Dockerfile](https://github.com/moz-sec/faq-search/blob/main/docker/Dockerfile).
+See the Dockerfile for details.
 
 ```bash
 docker pull ghcr.io/moz-sec/faq-search:latest
