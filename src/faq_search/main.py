@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __author__ = "moz-sec"
-__version__ = "0.1.4"
+__version__ = "0.2.0"
 __date__ = "2024/08/10 (Created: 2024/07/19)"
 
 import argparse

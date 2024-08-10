@@ -1,6 +1,6 @@
 [project]
 name = "faq-search"
-version = "0.1.1"
+version = "0.2.0"
 description = "`faq-search` is FAQ search system"
 authors = [
     { name = "moz-sec", email = "m0253c@gmail.com" }
