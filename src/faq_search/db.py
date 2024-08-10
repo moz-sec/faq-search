@@ -63,6 +63,19 @@ def analyze_excel_file(excel_file_path: str) -> tuple:
     return excel_data
 
 
+def get_all_faqs(
+    faq_db: str,
+) -> list:
+    """
+    Get all FAQ data.
+    """
+    conn = sqlite3.connect(database=faq_db)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM faq")
+
+    return cursor.fetchall()
+
+
 def get_faq_results(
     faq_ids: list,
     faq_db: str,
@@ -76,5 +89,5 @@ def get_faq_results(
         "SELECT * FROM faq WHERE id IN ({})".format(",".join("?" * len(faq_ids))),
         faq_ids,
     )
-    conn.close()
+
     return cursor.fetchall()
