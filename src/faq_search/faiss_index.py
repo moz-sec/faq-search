@@ -19,6 +19,7 @@ def compute_faq_embeddings(
     cursor.execute("SELECT id, question FROM faq")
     faq_data = cursor.fetchall()
     faq_ids, faq_questions = zip(*faq_data)
+    conn.close()
 
     return faq_ids, np.array(model.encode(faq_questions))
 

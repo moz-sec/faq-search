@@ -43,6 +43,8 @@ def create_faq_database(project_dir: Path) -> str:
     )
     conn.commit()
 
+    conn.close()
+
     return db_path
 
 
@@ -74,4 +76,5 @@ def get_faq_results(
         "SELECT * FROM faq WHERE id IN ({})".format(",".join("?" * len(faq_ids))),
         faq_ids,
     )
+    conn.close()
     return cursor.fetchall()
