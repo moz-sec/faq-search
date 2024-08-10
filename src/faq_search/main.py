@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*-
 
 __author__ = "moz-sec"
-__version__ = "0.1.1"
-__date__ = "2024/07/28 (Created: 2024/07/19)"
+__version__ = "0.1.2"
+__date__ = "2024/08/10 (Created: 2024/07/19)"
 
 import argparse
 import sys
 from pathlib import Path
 
+import uvicorn
 from sentence_transformers import SentenceTransformer
 
 from faq_search.db import create_faq_database, get_faq_results
@@ -24,7 +25,8 @@ def main():
     parser.add_argument("-v", "--version", action="version", version=__version__)
     parser.add_argument(
         "query",
-        help="search faq",
+        nargs="?",
+        help="Search FAQ",
     )
     parser.add_argument(
         "-n",
@@ -33,7 +35,20 @@ def main():
         default=3,
         help="number of search results",
     )
+    parser.add_argument(
+        "--server",
+        action="store_true",
+        default=False,
+        help="server mode",
+    )
     args = parser.parse_args()
+
+    if args.server:
+        uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=False)
+        return 0
+
+    if args.query:
+        parser.error("the following arguments are required: query")
 
     faq_db = create_faq_database(Path.cwd())
 
@@ -54,6 +69,7 @@ def main():
         [faq_ids[i] for i in faq_indices],
         faq_db=faq_db,
     )
+
     for result in results:
         print("=====")
         print(f"ID: {result[0]}")
