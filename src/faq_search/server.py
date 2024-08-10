@@ -4,6 +4,7 @@
 from contextlib import asynccontextmanager
 from pathlib import Path
 
+import uvicorn
 from fastapi import FastAPI
 from sentence_transformers import SentenceTransformer
 
@@ -13,6 +14,13 @@ from faq_search.faiss_index import (
     create_faiss_index,
     search_faq,
 )
+
+
+def server_run() -> None:
+    """
+    Run the API server
+    """
+    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=False)
 
 
 @asynccontextmanager
@@ -36,14 +44,14 @@ app = FastAPI(lifespan=lifespan)
 
 
 @app.get("/")
-async def root():
+async def root() -> dict:
     return {"Message": "FAQ Search API"}
 
 
 @app.get("/faq/{query:str}")
 async def faq(
     query: str,
-):
+) -> dict:
     faq_indices = search_faq(query=query, model=model, index=index_flat_l2, k=3)
 
     results = get_faq_results(
