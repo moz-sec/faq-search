@@ -1,4 +1,4 @@
-FROM python:3.13.0rc1-slim AS dev
+FROM python:3.13.0rc2-slim AS dev
 WORKDIR /app
 
 RUN pip install --upgrade pip
@@ -11,7 +11,7 @@ ENV PYTHONPATH /app/src
 
 CMD [ "/bin/bash" ]
 
-FROM python:3.13.0rc1-slim
+FROM python:3.13.0rc2-slim
 WORKDIR /app
 
 RUN pip install --upgrade pip
