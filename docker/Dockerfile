@@ -1,4 +1,4 @@
-FROM python:3.13.0-slim-bookworm AS dev
+FROM python:3.13.4-slim-bookworm AS dev
 WORKDIR /app
 
 RUN pip install --upgrade pip
@@ -11,7 +11,7 @@ ENV PYTHONPATH /app/src
 
 CMD [ "/bin/bash" ]
 
-FROM python:3.13.0-slim-bookworm
+FROM python:3.13.4-slim-bookworm
 WORKDIR /app
 
 RUN pip install --upgrade pip
